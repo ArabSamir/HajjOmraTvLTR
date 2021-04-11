@@ -1,0 +1,110 @@
+ {% load static %}
+ <!-- Start Footer 
+    ============================================= -->
+    <footer class="bg-dark text-light">
+        <!-- Fixed Shape -->
+        <div class="fixed-shape">
+            <img src="{% static 'img/shape/bg-3.png' %}" alt="Shape">
+        </div>
+        <!-- Fixed Shape -->
+
+        <!-- Footer Top -->
+       
+        <!-- End Footer Top -->
+        <div class="container">
+            <div class="f-items default-padding ">
+                <div class="row ">
+                    <div class="col-lg-4 col-md-6 item">
+                        <div class="f-item ">
+                            <h4 class="widget-title">Restez en contact</h4>
+                            <div class="address ">
+                                <ul>
+                                    <li>
+                                        <strong>Adresse :</strong>
+                                        {{contact.adresse}}
+                                    </li>
+                                    <li>
+                                        <strong>Email:</strong>
+                                        {{contact.first_email}}<br>
+                                        {{contact.secound_email}}
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 item">
+                        <div class="f-item link ">
+                            <h4 class="widget-title">Pages :</h4>
+                            <ul>
+                                <li>
+                                    <a href="{% url 'blog' %}">Blog</a>
+                                </li>
+                                <li>
+                                    <a href="{% if request.resolver_match.url_name == 'index' %}#about_us{% else %}{% url 'index' %}#about_us{% endif %}">A propos</a>
+                                </li>
+                                <li>
+                                    <a href="{% if request.resolver_match.url_name == 'index' %}#contact{% else %}{% url 'index' %}#contact{% endif %}">Contactez Nous</a>
+                                </li>
+                                {% if request.user.is_admin  %}
+                                    
+                                
+                                <li>
+                                    <a href="{% url 'dashboard' %}">Dashboard </a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    
+                    <div class="col-lg-4 col-md-6 item ">
+                        <div class="f-item about ">
+                            <img src="{{content.logo.url}}" style="height: 70px; " alt="Logo">
+                            <p>
+                               {{content.header_description}}
+ 
+                            </p>
+                            <div class="social ">
+                                <ul>
+                                    <li>
+                                        <a href="{{contact.facebook}}">
+                                            <i class="fab fa-facebook-f"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{contact.twitter}}">
+                                            <i class="fab fa-twitter"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{contact.youtube}}">
+                                            <i class="fab fa-youtube"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{contact.instagram}}">
+                                            <i class="fab fa-instagram"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Start Footer Bottom -->
+        <div class="footer-bottom text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>Copyright &copy;  2021. Designed by <a href="#">mulvice.org</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Footer Bottom -->
+    </footer>
+    <!-- End Footer -->

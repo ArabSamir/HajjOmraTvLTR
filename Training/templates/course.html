@@ -1,0 +1,99 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load templatetags %}
+
+{% block title %}{{course.title}}{% endblock title %}
+{% block body %}
+{% include 'base/header.html'  with contact=contact  content=content %}  
+
+
+	<!-- Start Blog
+	============================================= -->
+	<div class="blog-area single full-blog right-sidebar full-blog mb-5">
+		<div class="container">
+			<div class="blog-items">
+				<div class="row">
+					<div class="blog-content wow  col-lg-12 col-md-12" data-aos="fade-up">
+								{% for message in messages %}
+									{% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+										<div class="alert alert-success" role="alert">{{message}}</div>
+									{% else %}
+										<div class="alert alert-danger" role="alert">{{message}}</div>
+										
+									{% endif %}
+								{% endfor %}
+								<h3 class="  mt-5 mb-4">
+													 {{course.section.title}} :  {{course.title}}
+												</h3>
+								 <div class="row">
+								  
+									 <div class="item  col-md-12">
+
+										 <div class="blog-item-box">
+
+											 <div class="info">
+												<div>
+														{{course.content|safe}}
+												</div>
+
+													
+											 </div>
+										 </div>
+									 </div>
+								 </div>
+								 <div class="container ">
+								 	
+									 <!-- Start Post Pagination -->
+				                        <div class="post-pagi-area {% if not course.id|next %}float-left{% endif %}">
+									 {% if course.id|previous %}
+				                            <a href="{% url 'course_detail' course_pk=course.id|previous %}">
+				                                 <i class="fas fa-angle-double-left"></i> Cours précédente
+				                                <h5>{{course.id|previous|previous_title}}</h5>
+				                            </a>
+									 {% endif %}
+									 {% if course.id|next %}
+									     
+									 
+									 
+				                            <a href="{% url 'course_detail' course_pk=course.id|next %}">
+				                                Cours Suivant <i class="fas fa-angle-double-right"></i> 
+				                                <h5>{{course.id|next|next_title}}</h5>
+
+				                            </a>
+									 {% endif %}
+									 
+				                        </div>
+				                        <!-- End Post Pagination -->
+								 </div>
+
+				
+					</div>
+				   
+				   
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Blog -->
+ 
+
+
+{% include 'base/footer.html'  with contact=contact  content=content %}  
+{% endblock body %}
+
+
+
+
+
+<h1>{{course.section.title}} |  {{course.title}} </h1>
+<p>
+{{course.description}}
+</p>
+<div>
+	{{course.content|safe}}
+</div>
+
+<span>
+<button>next</button>
+	<button>previouse</button>
+</span>

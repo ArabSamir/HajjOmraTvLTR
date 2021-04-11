@@ -1,0 +1,284 @@
+{% extends "base/base.html" %}
+{% load l10n %}
+{% load static %}
+
+{% block title %}Payment{% endblock title %}
+
+{% block body %}
+{% include 'base/header.html'  with contact=contact  content=content %}  
+<div class="breadcrumb-area text-center shadow dark bg-fixed text-light" style="background-image: url({{training.image.url}});">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>{{training.title}}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+   <div class="blog-area grid-colum default-padding" >
+        <div class="container">
+            <div class="blog-items">
+                <div class="row">
+
+                    <div class="blog-content  col-lg-8 col-md-8">
+                        <div class="row">
+                            
+                                <div class="item" data-aos="fade-up">
+
+                                    <div class="blog-item-box">
+                                         <!-- start post thumb -->
+                                        <div class="thumb">
+                                          {% if training.image %}
+                                              
+                                             <img src="{{training.image.url}}"  alt="thumb">
+                                            
+                                          {% endif %}
+                                          {% if not active %}
+                                              
+                                          <div class="date product_item_span_detail"><span class="product_item_span">Prix : {{training.price_dzd}} DZD  - {{training.price}} €</span></div>
+                                          
+                                          {% endif %}
+                                        </div>
+                                         <!-- start training thumb -->
+                                         <div class="info product_info">
+                                            <div class="meta">
+                                                 <h3 class="">{{training.title}}</h3>
+                                            </div>
+                                            
+                                        </div>
+                                            
+                                            <div class="container ">
+
+                                                <div class="navbar navbar-default ">
+                                                    <div class="navbar-inner">
+                                                        <div class="container ">
+                                                            <ul class="nav navbar-nav nav-pills  mb-3" id="pills-tab" role="tablist">
+                                                                
+                                                                <li class=" nav-item  ">
+                                                                    <a class="nav-link nav_tab active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-profile" aria-selected="false" href="#">Définition </a></li>
+                                                            
+                                                                <li class="nav-item ">
+                                                                    <a class="nav-link nav_tab " id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-profile" aria-selected="false" href="#">Contenu </a></li>
+                                                                </ul>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="container">
+                                                        
+                                                    <div class="tab-content mb-3" id="pills-tabcontent">
+                                                      
+                                                       <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                                            <div class="container">
+                                                              {{training.content|safe}} 
+                                                            </div>
+                                                        </div>
+                                                      
+                                                      
+                                                            
+                                                      <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                                                            <div class="container">
+                                                        {% for section  in sections %}
+                                                                <div class="accordion" id="accordionExample">
+                                                                    <div class="">
+                                                                        <div class="" id="headingsection{{section.pk}}">
+                                                                          <h5 class="mb-0 card_border">
+                                                                            <button class="btn" type="button" data-toggle="collapse" data-target="#collapse{{section.id}}" aria-expanded="true" aria-controls="collapse{{section.id}}">
+                                                                              {{section.title}}  <i class="fa fa-chevron-right ml-3"></i>
+                                                                            </button>
+                                                                          </h5>
+                                                                        </div>
+
+                                                                        <div id="collapse{{section.id}}" class="collapse " aria-labelledby="headingsection{{section.pk}}" data-parent="#accordionExample">
+                                                                          <div class="card-body">
+                                                                                <div class="accordion" id="accordionExample2">
+                                                                                 
+                                                                                 {% for course in section.course_set.all %}
+                                                                                    
+                                                                                     <div class="card_border">
+                                                                                        
+                                                                                          <a href="{% url 'course_detail' course_pk=course.pk %}" class="btn btn-link text-left" style="width: 100%"> <i class="fa fa-arrow-right ml-3"></i> {{course.title}} {% if active %}
+                                                                                                    <i class="fa fa-unlock-alt float-right"></i>
+                                                                                            
+                                                                                            {% else %}
+                                                                                                {% if course.opened %}
+                                                                                                    <i class="fa fa-unlock-alt float-right"></i>
+                                                                                                
+                                                                                                {% else %}
+                                                                                                        
+                                                                                               
+                                                                                                    <i class="fa fa-lock float-right"></i>
+                                                                                                {% endif %}
+                                                                                            {% endif %}</a>
+                                                                                     </div>
+                                                                                    
+
+                                                                                 {% endfor %}
+
+                                                                                </div>
+
+                                                                          </div>
+                                                                        </div>
+                                                                    </div>
+                                                                  
+                                                                </div>
+                                                        {% endfor %}
+                                                                
+                                                            </div>
+                                                      </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                        
+                                             
+                                             
+                                    </div>
+                                </div>
+                        </div>
+
+                    </div>
+
+                <!-- start sidebar -->
+                    <div class="sidebar wow  col-lg-4 col-md-12"  >
+                        <aside>
+                            <div class="sidebar-item search" data-aos="fade-left">
+                                <div class="sidebar-info">
+                                    <form method="get">
+                                        <input type="text" name="keyword" class="form-control" value="{{request.get.keyword}}">
+                                        <button type="submit"><i class="fas fa-chevron-down"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="container"><div class="sidebar-item recent-post " data-aos="fade-left">
+                                <div class="title ">
+                                    <h4>Commandez maintenant :</h4>
+                                </div>
+                                <div class="title ">
+                                <h5>Par CCP : </h5>
+                                </div>
+                                <div class="container mb-3">
+                                    
+                                <h5>Prix {{training.price_dzd}} DZ</h5>
+                                <label>Numero de compte : {{content.ccp}}</label>
+
+                                </div>
+                                <div class="title ">
+                                <h5>Par PayPal :</h5>
+                                </div>
+                                <div class="container">
+                                    
+                                <h5>Prix {{training.price}}  €:</h5>
+                                <div id="paypal-button-container"></div>
+                                </div>
+                            </div></div>
+                            
+                        </aside>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% include 'base/footer.html'  with contact=contact  content=content %}  
+{% endblock body %}
+
+
+
+{% block script %}
+                  
+
+<script src="https://www.paypal.com/sdk/js?client-id={{content.paypal_client_id}}&currency=EUR"></script>
+
+<script>
+
+        function renderButtons(containerID) {
+            setTimeout(function () {
+                if (payPalSubscribeButtons && payPalSubscribeButtons.close) {
+                    payPalSubscribeButtons.close();
+                }
+                payPalSubscribeButtons = paypal.Buttons({
+
+            // Set up the transaction
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: price
+                        }
+                    }]
+                });
+            },
+
+            // Finalize the transaction
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    // Show a success message to the buyer
+                    alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                    CompletePayment(data , details)
+                    window.location = '{% url "completed" %}';
+                });
+            }
+
+
+        });
+                payPalSubscribeButtons.render(containerID);
+            }, 1);
+        }
+
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        
+
+
+        function CompletePayment(data , details){
+            var url = "{% url 'payment' pk=training.pk %}";
+            
+            fetch(url, {
+                method:'POST',
+                headers:{
+                    'Content-type':'application/json',
+                    'X-CSRFToken' : csrftoken,
+                },
+                body:JSON.stringify({
+                    'product_id':product_id , 
+                    'data':data, 
+                    'details':details})
+            })                  
+
+        }
+
+        
+        var price = '{{training.price|unlocalize }}';
+        
+        var product_id = '{{training.id}}';
+        const csrftoken = getCookie('csrftoken');
+
+
+        // Render the PayPal button into #paypal-button-container
+        payPalSubscribeButtons =   paypal.Buttons();
+
+
+
+        renderButtons('#paypal-button-container');
+
+</script>
+{% endblock script %}
+

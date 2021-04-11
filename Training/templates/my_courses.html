@@ -1,0 +1,123 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}دوراتي{% endblock title %}
+
+
+{% block body %}
+{% include 'base/header.html'  with contact=contact  content=content %}  
+
+<!-- Start Breadcrumb 
+	============================================= -->
+	<div class="breadcrumb-area text-center shadow dark bg-fixed text-light" style="background-image: url({% static 'img/makkah4.jpg' %});">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<h2>الدورات</h2>
+					<ul class="breadcrumb">
+						<li class="active">دوراتي</li>
+						<li ><a href="{% url 'index' %}">االرئيسية  <i class="fas fa-home"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Breadcrumb -->
+
+	  <!-- Start Blog
+    ============================================= -->
+    <div class="blog-area grid-colum default-padding">
+        <div class="container">
+            <div class="blog-items">
+                	<div class="blog-content  col-lg-12 col-md-8">
+                    	<div class="blog-item-box">
+                    		{% for message in messages %}
+						        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+						            <div class="alert alert-success" role="alert">{{message}}</div>
+						        {% else %}
+						            <div class="alert alert-danger" role="alert">{{message}}</div>
+						            
+						        {% endif %}
+						    {% endfor %}
+
+						    {% if user_trainings %}
+							    <div class="row ">
+							    	
+								    {% for user_training in user_trainings %}
+									
+
+			                            <!-- Single Item -->
+			                            <div class="col-lg-4 col-md-12 single-item" data-aos="fade-up">
+			                                <div class="item wow fadeInUp" data-wow-delay="500ms">
+			                                    <div class="thumb">
+			                                        <a href="{% url 'training_detail' training_pk=user_training.training.pk %}" >
+			                                            <img src="{{user_training.training.image.url}}"  alt="Thumb">
+			                                        </a>
+			                                        <!-- <div class="date product_item"><span class="product_item_span">{{user_training.training.price}} $</span></div> -->
+			                                    </div>
+			                                    <div class="info text-right product_info">
+			                                        <div class="meta">
+			                                             <h3 class="text-right"><a href="{% url 'training_detail' training_pk=user_training.training.pk %}">{{user_training.training.title}}</a></h3>
+			                                        </div>
+			                                        <p class="text-right">
+			                                            <a href="{% url 'training_detail' training_pk=user_training.training.pk %}" class="product_description">{{user_training.training.description}}</a>
+			                                        </p>
+			                                        <a class="btn-more product_buy" href="{% url 'training_detail' training_pk=user_training.training.pk %}">التفاصيل<i class="fas fa-long-arrow-alt-right"></i></a>
+			                                    </div>
+			                                </div>
+			                            </div>
+			                            <!-- End Single Item -->
+									{% endfor %}
+
+							    </div>
+
+					   		{% else %}
+  								<div class="alert alert-danger text-right" role="alert">لم يتم العثور على أي   دورة</div>
+							{% endif %}
+
+                           
+                        
+                        
+	                        {% if user_trainings %}
+							    <!-- Pagination -->
+								<div class="row">
+									<div class="col-md-12 pagi-area text-center">
+										<nav aria-label="navigation">
+											<ul class="pagination">
+												{% if page_obj.has_previous %}
+													<li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}"><i class="fas fa-angle-double-left"></i></a></li>
+												<li class="page-item "><a class="page-link" href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
+										        {% endif %}
+												<li class="page-item active"><a class="page-link" href="#">{{ page_obj.number }}</a></li>
+					        					{% if page_obj.has_next %}
+													<li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
+													<li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}"><i class="fas fa-angle-double-right"></i></a></li>
+												{% endif %}
+											</ul>
+										</nav>
+									</div>
+								</div>
+								<!-- Pagination -->
+							{% endif %}
+	                    </div>
+	                </div>
+
+					
+					<!-- End Start Sidebar -->
+            </div>
+        </div>
+    </div>
+    <!-- End Blog -->
+    
+
+
+	
+
+
+{% include 'base/footer.html'  with contact=contact  content=content %}  
+
+{% endblock body %}
+<h1>My courses</h1>
+{% for user_training in user_trainings %}
+	<h1><a href="{% url 'training_detail' training_pk=user_training.training.pk %}">{{user_training.training.title}}</a></h1>
+	<p>{{user_training.training.description}}</p>
+{% endfor %}

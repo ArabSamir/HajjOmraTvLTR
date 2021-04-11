@@ -1,0 +1,8 @@
+*.sqlite3
+*__pycache__
+*media
+HajjOmraTv/settings.py
+passenger_wsgi.py
+static_cdn/
+stderr.log
+tmp/

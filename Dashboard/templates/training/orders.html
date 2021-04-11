@@ -1,0 +1,103 @@
+{% extends "dash_base/base.html" %}
+{% load static %}
+
+{% block title %}الطلبات{% endblock title %}
+{% block page_title %}الطلبات{% endblock page_title %}
+
+{% block breadcrumb %}
+    <li class="active">جميع الطلبات </li>
+    
+{% endblock  %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-md-12">
+    {% for message in messages %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+            <div class="alert alert-success" role="alert">{{message}}</div>
+        {% else %}
+            <div class="alert alert-danger" role="alert">{{message}}</div>
+            
+        {% endif %}
+    {% endfor %}
+</div>
+    <div class="col-md-12">
+        <div class="panel panel-card ">
+            <!-- Start .panel -->
+            <div class="panel-heading">
+                <h4 class="panel-title"> جميع الطلبات</h4>
+                <div class="panel-actions">
+                    <button  type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" >إضافة طلب جديد</button>
+                    <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+                     <div class="modal fade " id="exampleModal" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel">
+                                      <div class="modal-dialog modal-lg" role="document">
+                                        <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+                                            <div class="modal-content" style="    margin-top: 100px;">
+                                              <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="exampleModalLabel">إضافة طلب</h4>
+                                              </div>
+                                              <div class="modal-body">
+                                                    {{form.as_p}}
+                                              </div>
+                                              <div class="modal-footer">
+                                                <!-- <button type="button" class="btn btn-primary">إضافة</button> -->
+                                                <input type="submit" name="add_course" value="إضافة" class="btn btn-sm btn-primary">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">إغلاق</button>
+                                              </div>
+                                            </div>
+                                        </form>
+                                      </div>
+                                    </div>
+                    
+                </div>
+            </div>
+            <div class="panel-body">
+                <table id="basic-datatables" class="table table-bordered" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th> </th>
+                            <th> الإسم الكامل</th>
+                            <th>  الإيميل</th>
+                            <th> عنوان الدورة</th>
+                            <th> تاريخ الطلب</th>
+                            <th> الحالة</th>
+                            <th> تفعيل / تعطيل</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        {% for order in orders %}
+                            <tr>
+                                <td>{{order.id}}</td>
+                                <td>{{order.user.get_full_name}}</td>
+                                <td>{{order.user.email}}</td>
+                                <td>{{order.training.title}}</td>
+                                <td>{{order.purchase_date|date:"Y/m/d"}}</td>
+                                <td>{% if order.active %}<span class="label label-success">فعال</span>{% else %}<span class="label label-danger">غير فعال</span>{% endif %}</td>
+                                <td>
+                                    {% if order.active %}
+                                        <a href="{% url 'deactivate_training' pk=order.pk %}"  ><i class="fa fa-toggle-on"></i></a>
+                                    {% else %}
+                                        <a href="{% url 'active_training' pk=order.pk %}"  ><i class="fa fa-toggle-off"></i></a>
+                                    {% endif %}
+                                   
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div><!-- End .panel -->  
+    </div><!--end .col-->
+</div> 
+{% endblock body %}
+
+{% block script %}
+    <script src="{% static 'dashboard/js/data-tables/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'dashboard/js/data-tables/dataTables.tableTools.js' %}"></script>
+    <script src="{% static 'dashboard/js/data-tables/dataTables.bootstrap.js' %}"></script>
+    <script src="{% static 'dashboard/js/data-tables/dataTables.responsive.js' %}"></script>
+    <script src="{% static 'dashboard/js/data-tables/tables-data.js' %}"></script>
+{% endblock script %}

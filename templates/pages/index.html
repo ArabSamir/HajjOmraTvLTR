@@ -1,0 +1,369 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block link %}
+
+{% endblock link %}
+
+
+{% block body %}
+    
+    {% include 'base/header.html'  with contact=contact  content=content %} 
+
+    <!-- Start About Area
+    ============================================= -->
+    <div class="about-area half-bg default-padding overflow-hidden"  id="about_us">
+        <div class="container">
+            {% for message in messages %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                    <div class="alert alert-success " role="alert">{{message}}</div>
+                {% else %}
+                    <div class="alert alert-danger " role="alert">{{message}}</div>
+                    
+                {% endif %}
+            {% endfor %}
+            <div class="about-content">
+                <div class="row" data-aos="fade-up">
+                    <div class="col-lg-7 info" >
+                        
+                        <div class="top-info ">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="item">
+                                        <div class="title">
+                                            <i class="flaticon-target"></i>
+                                            <h4>Notre  Mission</h4>
+                                        </div>
+                                        <p>
+                                            Use off agreeable law unwilling sir deficient curiosity instantly. Easy mind life fact with see has bore ten. Parish any chatty can elinor direct for former. Up as meant widow equal. 
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="item">
+                                        <div class="title">
+                                            <i class="flaticon-vision-1"></i>
+                                            <h4>Notre Vision</h4>
+                                        </div>
+                                        <p>
+                                            Use off agreeable law unwilling sir deficient curiosity instantly. Easy mind life fact with see has bore ten. Parish any chatty can elinor direct for former. Up as meant widow equal. 
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="bottom-info">
+                            <h2>450,000 client’s interactions!</h2>
+                            <div class="clients-carousel-3-col owl-carousel owl-theme">
+                                <a href="#"><img src="{% static 'img/clients/1.png' %}" alt="Client"></a>
+                                <a href="#"><img src="{% static 'img/clients/2.png' %}" alt="Client"></a>
+                                <a href="#"><img src="{% static 'img/clients/3.png' %}" alt="Client"></a>
+                                <a href="#"><img src="{% static 'img/clients/4.png' %}" alt="Client"></a>
+                                <a href="#"><img src="{% static 'img/clients/5.png' %}" alt="Client"></a>
+                                <a href="#"><img src="{% static 'img/clients/6.png' %}" alt="Client"></a>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="col-lg-5 thumbs">
+                        <div class="thumb-items">
+                            <img src="{{content.about_us_image.url}}" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; border-radius: 5px;" alt="Thumb">
+                            <div class="video">
+                                <a href="#" class="btn btn-info">Abonnez Vous</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End About Area -->
+ <!-- Start Case Studies Area
+    ============================================= -->
+    <div class="case-studies-area overflow-hidden grid-items default-padding"  data-aos="fade-up">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="site-heading text-center">
+                        <h2 class="area-title">{{content.videos_title}}</h2>
+                        <div class="devider"></div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="case-items-area">
+                <div class="row masonary">
+                    <div id="" class=" row">
+                        {% for video in videos %}
+                            
+                        
+                            <!-- Single Item -->
+                            <div class="pf-item col-lg-4 mt-3">
+                                <div class="item">
+                                    <div class="thumb video">
+                                        <img src="{{video.image.url}}" alt="Thumb">
+                                        <a href="{{video.url}}"  class="popup-youtube"><i class="fa fa-play"></i></a>
+                                    </div>
+                                    <div class="desc-bg">
+                                            <h5 class="desc-a">{{video.title}}</h5> 
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Single Item -->
+                        {% endfor %}
+
+                       
+                       
+
+                    </div>
+                </div>
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="site-heading text-center mt-3">
+                        <p><a href="{{content.subscribe_url}}">{{content.subscribe_text}}</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Case Studies Area -->
+
+   
+
+    <!-- Start Blog Area 
+    ============================================= -->
+    <div class="blog-area default-padding-bottom bottom-less" data-aos="fade-up">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="site-heading text-center">
+                        <h2 class="area-title">{{content.blog_title}}</h2>
+                        <div class="devider"></div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="blog-items">
+                <div class="row">
+                    {% for post in posts %}
+                        
+                    <!-- Single Item -->
+                    <div class="single-item col-lg-4 ">
+                        <div class="item">
+                            <div class="thumb">
+                                <img src="{{post.image.url}}" alt="Thumb">
+                                <div class="date">{{ post.created_on|date:"d" }} <span> {{ post.created_on|date:"Y" }},{{ post.created_on|date:"m" }}</span></div>
+                            </div>
+                            <div class="info">
+                                <div class="meta">
+                                    <ul>
+                                        <li><a href="#"><i class="fas fa-user"></i> {{post.author.name}} {{post.author.lastname}}</a></li>
+                                        <!-- <li><a href="#"><i class="fas fa-comments"></i> 15 Comments</a></li> -->
+                                    </ul>
+                                </div>
+                                <h4 class="">
+                                    <a href="{% url 'post_detail' pk=post.pk %}">{{post.title}}</a>
+                                </h4>
+                                <p class="test">
+                                    {{post.description}} 
+                                </p>
+                                <a class="btn-more" href="{% url 'blog' %}"><i class="fas fa-long-arrow-alt-left"></i> Lire la suite</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Single Item -->
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Blog Area Area -->
+
+
+
+
+
+
+
+
+
+    <!-- Start Blog Area 
+    ============================================= -->
+    <div class="blog-area default-padding-bottom bottom-less" data-aos="fade-up">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="site-heading text-center">
+                        <h2 class="area-title">Nos Formation</h2>
+                        <div class="devider"></div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="blog-items">
+                <div class="row">
+
+                            {% for training in trainings %}
+							
+
+	                            <!-- Single Item -->
+	                            <div class="col-lg-4 col-md-12 single-item" data-aos="fade-up">
+	                                <div class="item wow fadeInUp" data-wow-delay="500ms">
+	                                    <div class="thumb">
+	                                        <a href="{% url 'training_detail' training_pk=training.pk %}" >
+	                                            <img src="{{training.image.url}}"  alt="Thumb">
+	                                        </a>
+	                                        <div class="date product_item_span_detail"><span class="product_item_span">Prix : {{training.price_dzd}} DZD - {{training.price}} € </span></div>
+	                                    </div>
+	                                    <div class="info product_info">
+	                                        <div class="meta">
+	                                             <h3 class=""><a href="{% url 'training_detail' training_pk=training.pk %}">{{training.title}}</a></h3>
+	                                        </div>
+	                                        <p class="">
+	                                            <a href="{% url 'training_detail' training_pk=training.pk %}" class="product_description">{{training.description}}</a>
+	                                        </p>
+	                                        <a class="btn-more product_buy" href="{% url 'payment' pk=training.pk %}">Achetez<i class="fas fa-long-arrow-alt-right"></i></a>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                            <!-- End Single Item -->
+							{% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Blog Area Area -->
+
+
+    <!-- Start Contact Area 
+    ============================================= -->
+    <div class="contact-area bg-gray half-bg default-padding"  id="contact" >
+        <div class="container">
+            <div class="contact-box">
+                <div class="row" data-aos="fade-up">
+                    <div class="col-lg-5 left-info">
+                        <div class="item">
+                            <div class="icon">
+                                <i class="fas fa-map-marked-alt"></i>
+                            </div>
+                            <div class="info">
+                                <h5>Adresse</h5>
+                                <p>
+                                    {{contact.adresse}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="info">
+                                <h5>Tel</h5>
+                                <p>
+                                    {{contact.phone}} 
+                                </p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="icon">
+                                <i class="fas fa-envelope-open"></i>
+                            </div>
+                            <div class="info">
+                                <h5>E-mail</h5>
+                                <p>
+                                     {{contact.first_email}}  <br> {{contact.secound_email}} 
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 offset-lg-1">
+                        <div class="content">
+                            <div class="heading ">
+                                <h2 class="">Contactez Nous</h2>
+                                <!-- <p>Reach out to the world’s most reliable IT services.</p> -->
+                            </div>
+                            <form  method="POST"  >{% csrf_token %}
+                              <div class="row">
+                                    
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                             {{form.name}}
+                                            <span class="alert-error"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            {{form.phone}}
+                                            <span class="alert-error"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            {{form.email}}
+                                            <span class="alert-error"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group comments">
+                                            {{form.comments}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <button type="submit" name="submit" class="" id="submit">
+                                            Contactez Nous
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Contact Area -->
+
+    {% include 'base/footer.html' with content=content contact=contact %}
+{% endblock body %}
+
+
+{% block script %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+           $('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
+                disableOn: 700,
+                type: 'iframe',
+                mainClass: 'mfp-fade',
+                removalDelay: 160,
+                preloader: false,
+
+                fixedContentPos: false
+            });
+
+        });
+    </script>
+    
+    <script type="text/javascript">
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+   
+{% endblock script %}

@@ -1,0 +1,120 @@
+{% extends "dash_base/base.html" %}
+{% load static %}
+{% block title %}
+    المقالات
+{% endblock title %}
+{% block page_title %}المقالات{% endblock page_title %}
+
+{% block breadcrumb %}
+    <li class="active">المقالات </li>
+    
+{% endblock  %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-md-12">
+    {% for message in messages %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+            <div class="alert alert-success" role="alert">{{message}}</div>
+        {% else %}
+            <div class="alert alert-danger" role="alert">{{message}}</div>
+            
+        {% endif %}
+    {% endfor %}
+</div>
+    <div class="col-md-12">
+        <div class="panel panel-card ">
+            <!-- Start .panel -->
+            <div class="panel-heading">
+                <h4 class="panel-title"> جميع المقالاات</h4>
+                <div class="panel-actions">
+                   <button  type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" >إضافة مقال جديد</button>
+                    <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+                     <div class="modal fade " id="exampleModal" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel">
+                                      <div class="modal-dialog modal-lg" role="document">
+                                        <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+                                            <div class="modal-content" style="    margin-top: 100px;">
+                                              <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="exampleModalLabel">إضافة مقال</h4>
+                                              </div>
+                                              <div class="modal-body">
+                                                    {{form.media }}
+                                                    {{form.as_p}}
+                                              </div>
+                                              <div class="modal-footer">
+                                                <!-- <button type="button" class="btn btn-primary">إضافة</button> -->
+                                                <input type="submit" name="add_course" value="إضافة" class="btn btn-sm btn-primary">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">إغلاق</button>
+                                              </div>
+                                            </div>
+                                        </form>
+                                      </div>
+                                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <table id="basic-datatables" class="table table-bordered" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th> #</th>
+                            <th>العنوان</th>
+                            <th>الكاتب</th>
+                            <th>الفئة</th>
+                            <th> تاريخ الإنشاء</th>
+                            <th> عدد التعليقات</th>
+                            <th> الحالة</th>
+                            <th>النشاط</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        {% for post in posts %}
+                            <tr>
+                                <td>{{post.id}}</td>
+                                <td>{{post.title}}</td>
+                                <td>{{post.author.get_full_name}}</td>
+                                <td>{{post.category}}</td>
+                                <td>{{post.created_on}}</td>
+                                <td>{{post.nb_comments}}</td>
+                                <td>{% if post.statut == 1 %}<span class="label label-success">ينشر</span>{% else %}<span class="label label-danger">مسودة</span>{% endif %}</td>
+                                <td>
+                                    <a href="{% url 'dash_post_detail' pk=post.pk %}"  ><i class="fa fa-edit"></i></a>
+                                    <a href="#" data-toggle="modal" data-target="#exampleModal{{post.pk}}"><i class="fa fa-trash" style="color: #df645d;"></i></a>
+                                    <div class="modal fade " id="exampleModal{{post.pk}}" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel">
+                                      <div class="modal-dialog modal-sm" role="document">
+                                            <div class="modal-content" style="    margin-top: 100px;">
+                                              <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="exampleModalLabel">حذف دورة</h4>
+                                              </div>
+                                              <div class="modal-body">
+                                                   <p>هل أنت متاكد من حذف {{post.title}}؟</p>
+                                              </div>
+                                              <div class="modal-footer">
+                                                <!-- <button type="button" class="btn btn-primary">حذف</button> -->
+                                                <a href="{% url 'del_post' pk=post.pk %}" class="btn btn-sm btn-danger">نعم</a>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">إغلاق</button>
+                                              </div>
+                                            </div>
+                                      </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div><!-- End .panel -->  
+    </div><!--end .col-->
+</div> 
+{% endblock body %}
+
+{% block script %}
+    <script src="{% static 'dashboard/js/data-tables/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'dashboard/js/data-tables/dataTables.tableTools.js' %}"></script>
+    <script src="{% static 'dashboard/js/data-tables/dataTables.bootstrap.js' %}"></script>
+    <script src="{% static 'dashboard/js/data-tables/dataTables.responsive.js' %}"></script>
+    <script src="{% static 'dashboard/js/data-tables/tables-data.js' %}"></script>
+{% endblock script %}

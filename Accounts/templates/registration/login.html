@@ -1,0 +1,37 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}
+    تسجيل الدخول
+{% endblock title %}
+
+{% block body %}
+
+	{% include 'base/header.html' with contact=contact  content=content  %}    
+
+	 <div class="container default-padding-top	">
+	            <div class="row">
+	                <div class="col-lg-8 offset-lg-2">
+	                    <div class="site-heading text-center">
+	                        <h1>تسجيل الدخول </h1>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	<div class="container default-padding-bottom">
+		<div class="col-md-6 col-sm-10 col-md-offset-3 col-sm-offset-1 mx-auto text-right">
+
+			<form method="POST"> {% csrf_token %}
+
+				{{form.as_p}}
+				<a href="{% url 'password_reset' %}">نسيت كلمة السر؟</a>
+				<br>
+				<input type="submit" class ="btn btn-success" value="أدخل">
+			</form>
+
+		</div>
+	</div>
+
+	{% include 'base/footer.html'  with content=content contact=contact %}    
+    
+{% endblock body %}

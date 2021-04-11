@@ -1,0 +1,51 @@
+{% extends "dash_base/base.html" %}
+{% load static %}
+
+{% block title %}تعديل المحتوى{% endblock title %}
+{% block page_title %}تعديل المحتوى{% endblock page_title %}
+
+{% block breadcrumb %}
+    <li class="active">تعديل المحتوى</li>
+    
+{% endblock  %}
+
+
+{% block body %}
+    
+<div class="row">
+    <div class="col-md-12">
+    {% for message in messages %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+            <div class="alert alert-success" role="alert">{{message}}</div>
+        {% else %}
+            <div class="alert alert-danger" role="alert">{{message}}</div>   
+        {% endif %}
+    {% endfor %}
+</div>
+ <div class="col-md-12">
+
+    <div class="panel panel-card recent-activites">
+        <!-- Start .panel -->
+        <div class="panel-heading">
+            <h4 class="panel-title">تعديل المحتوى</h4>
+            <div class="panel-actions">
+                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                <!-- <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss=""></a> -->
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+            	<form method="POST" enctype="multipart/form-data">{% csrf_token %}
+            		<div class="col-md-12">
+	            			
+			        	{{form.media }}
+					    {{form.as_p }}
+					    <input type="submit" name="training" value="تعديل" class="btn btn-sm btn-primary pull-right m-t-n-xs">            		
+					</div>
+            	</form>
+      		</div>
+        </div>
+    </div><!-- End .panel --> 
+</div>
+
+{% endblock body %}

@@ -1,0 +1,232 @@
+{% load static %}
+
+    <!-- Start Header Top 
+    ============================================= -->
+    <div class="top-bar-area inc-pad transparent text-light">
+        <div class="container-full">
+            <div class="row align-center">
+                <div class="col-lg-6 info">
+                    <ul>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i> {{contact.adresse}}
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope-open"></i> {{contact.first_email}}
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 text-right item-flex">
+                   <!--  <div class="info">
+                        <ul>
+                            <li>
+                                <i class="fas fa-clock"></i> Office Hours: 8:00 AM – 7:45 PM
+                            </li>
+                        </ul>
+                    </div> -->
+                    <div class="social">
+                        <ul>
+                            <li>
+                                <a href="{{contact.facebook}}">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{contact.twitter}}">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{contact.instagram}}">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{contact.youtube}}">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Header Top -->
+
+    <!-- Header 
+    ============================================= -->
+    <header id="home">
+
+        <!-- Start Navigation -->
+        <nav class="navbar navbar-default bootsnav {% if  request.resolver_match.url_name == 'index' %} attr-bg navbar-fixed white no-background bootsnav inc-topbar {% else %} navbar-sticky 
+        {% endif %}">
+            <div class="container-full">
+                <div class="nav-box">
+
+                    <!-- Start Atribute Navigation -->
+                    <!-- <div class="attr-nav inc-border">
+                        <ul>
+                            <li class="button"><a href="#">سجل معنا</a></li>
+                        </ul>
+                    </div>   -->      
+                    <!-- End Atribute Navigation -->
+
+                    <!-- Start Header Navigation -->
+                    <div class="navbar-header float-lg-left float-xl-left  ">
+                        <button type="button" class="navbar-toggle " data-toggle="collapse" data-target="#navbar-menu">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <a class="navbar-brand" href="{% url 'index' %}">
+                            <img src="{{content.logo.url}}" style="width: 80px;" class="logo {% if request.resolver_match.url_name == 'index' %} logo-display {% endif %}"  alt="Logo">
+                            {% if request.resolver_match.url_name == 'index' %}
+                                
+                            
+                            <img src="{{content.logo_white.url}}" style="width: 80px;" class="logo logo-scrolled"  alt="Logo">
+                            {% endif %}
+                        </a>
+                    </div>
+                    <!-- End Header Navigation -->
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse float-right" id="navbar-menu">
+                        <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+                            
+                            <li class="dropdown">
+                                <a href="{% url 'index' %}" >Accueil</a>
+                                
+                            </li>
+                            
+                            <li class="dropdown">
+                                <a href="{% url 'blog' %}">Blog</a>
+                                
+                            </li>
+                            <li class="dropdown">
+                                <a href="{% url 'trainings' %}">Formation</a>
+                                
+                            </li>
+                            
+                            <li>
+                                <a href="{% if request.resolver_match.url_name == 'index' %}#about_us{% else %}{% url 'index' %}#about_us{% endif %}">À propos</a>
+                            </li>
+                            <li>
+                                <a href="{% if request.resolver_match.url_name == 'index' %}#contact{% else %}{% url 'index' %}#contact{% endif %}">contactez nous</a>
+                            </li>
+                            {% if request.user.is_authenticated %}
+                                <div class="navbar-header ">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
+                                        <img src="{{request.user.profile.image.url}}" class="profile_pic" alt="Logo">
+                                        </a>
+
+                                        <ul class="dropdown-menu">
+                                            <li class="dropdown ">
+                                                <a href="{% url 'profile' %}"  class="text-right">الملف الشخصي</a>
+                                                <a href="{% url 'my_trainings' %}"  class="text-right">دوراتي</a>
+                                            </li>
+                                            <li class="dropdown ">
+                                                <a href="{% url 'change_password' %}"  class="text-right">تغيير كلمة السر</a>
+                                            </li>
+                                            <li class="dropdown ">
+                                                <a href="{% url 'logout' %}"  class="text-right">تسجيل الخروج</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    
+                                </div>
+                            {% else %}
+                                     
+                                    <li class="dropdown">
+                                        <a href="{% url 'login' %}"  >Se connecter</a>
+
+                                    </li>
+                                     <li class="dropdown ">
+                                        <a href="{% url 'signup' %}" class="sign_up"  ><i class="fa fa-user"></i> S'inscrire</a>
+
+                                    </li>
+                            
+                            {% endif %}
+                            
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div>
+            </div>
+        </nav>
+        <!-- End Navigation -->
+
+    </header>
+    <!-- End Header -->
+
+{% if request.resolver_match.url_name == 'index' %}
+
+    <!-- Start Banner 
+    ============================================= -->
+    <div class="banner-area text-center top-pad-80 inc-shape text-large">
+        <div id="bootcarousel" class="carousel text-light slide carousel-fade animate_text" data-ride="carousel">
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner carousel-zoom">
+                <div class="carousel-item active">
+                    <div class="slider-thumb bg-cover" style="background-image: url({{content.header_image.url}});"></div>
+                    <div class="box-table">
+                        <div class="box-cell shadow dark">
+                            <div class="container">
+                                <div class="row">
+
+                                    <div class="col-lg-8 offset-lg-2" data-aos="fade-down"
+     data-aos-easing="linear"
+     data-aos-duration="1500">
+                                        <div class="content">
+                                            <h2 data-animation="animated slideInRight">{{content.header_title}}</h2>
+                                             <p  data-animation="animated slideInLeft">{{content.header_description}}</p>
+                                            <a class="btn btn-info" style="color: #000;"  href="https://www.youtube.com/watch?v=owhuBrGIOsE">
+                                                Abonnez-vous avec nous
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item ">
+                    <div class="slider-thumb bg-cover" style="background-image: url({{content.header_image.url}});"></div>
+                    <div class="box-table">
+                        <div class="box-cell shadow dark">
+                            <div class="container">
+                                <div class="row">
+
+                                    <div class="col-lg-8 offset-lg-2">
+                                        <div class="content">
+                                            <h2 data-animation="animated slideInRight" data-aos="fade-down"
+     data-aos-easing="linear"
+     data-aos-duration="1500">{{content.header_title_s}}</h2>
+                                             <p  data-animation="animated slideInLeft">{{content.header_description_s}}</p>
+                                            <a class="btn btn-info" style="color: #000;"  href="https://www.youtube.com/watch?v=owhuBrGIOsE">
+                                                Abonnez-vous avec nous
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+            <!-- End Wrapper for slides -->
+
+            <!-- Left and right controls -->
+            <a class="left carousel-control light" href="#bootcarousel" data-slide="prev">
+                <i class="fa fa-angle-left"></i>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control light" href="#bootcarousel" data-slide="next">
+                <i class="fa fa-angle-right"></i>
+                <span class="sr-only">Next</span>
+            </a>
+
+        </div>
+    </div>
+    <!-- End Banner -->
+
+     {% endif %}

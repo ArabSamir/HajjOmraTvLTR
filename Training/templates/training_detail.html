@@ -1,0 +1,253 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}{{training.title}}{% endblock title %}
+
+{% block body %}
+{% include 'base/header.html'  with contact=contact  content=content %}  
+
+<!-- start breadcrumb 
+	============================================= -->
+	<div class="breadcrumb-area text-center shadow dark bg-fixed text-light" style="background-image: url({{training.image.url}});">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<h2>{{training.title}}</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="blog-area grid-colum default-padding" >
+		<div class="container">
+			{% if exists and not active %}
+                                    <div class="alert alert-danger text-right" role="alert">لم يتم تفعيل الدورة بعد</div>
+			{% endif %}
+			{% for message in messages %}
+                                {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                                    <div class="alert alert-success text-right" role="alert">{{message}}</div>
+                                {% else %}
+                                    <div class="alert alert-danger text-right" role="alert">{{message}}</div>
+                                    
+                                {% endif %}
+                            {% endfor %}
+			<div class="blog-items">
+				<div class="row">
+ 							
+					<div class="blog-content  col-lg-8 col-md-8">
+						<div class="row">
+							
+								<div class="item float-right text-right" data-aos="fade-up">
+
+									<div class="blog-item-box">
+										 <!-- start post thumb -->
+										<div class="thumb">
+										  {% if training.image %}
+											  
+											 <img src="{{training.image.url}}"  alt="thumb">
+										  	
+										  {% endif %}
+										  {% if not exists %}
+										      
+										  <div class="date product_item_span_detail"><span class="product_item_span">$ {{training.price}} :السعر</span></div>
+										  <a href="{% url 'payment' pk=training.pk %}" class="product_item_buy btn btn-success">أشتري <i class="fa fa-credit-card ml-3"></i></a>
+										  
+										  {% endif %}
+										</div>
+										 <!-- start training thumb -->
+										 <div class="info text-right product_info">
+	                                        <div class="meta">
+	                                             <h3 class="text-right">{{training.title}}</h3>
+	                                        </div>
+	                                        
+	                                    </div>
+											
+											<div class="container ">
+
+												<div class="navbar navbar-default ">
+													<div class="navbar-inner float-right">
+														<div class="container ">
+															<ul class="nav navbar-nav nav-pills  mb-3" id="pills-tab" role="tablist">
+																
+																
+																<li class="nav-item ">
+																	<a class="nav-link nav_tab " id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-profile" aria-selected="false" href="#">المحتوى </a></li>
+																<li class=" nav-item  ">
+																	<a class="nav-link nav_tab active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-profile" aria-selected="false" href="#">التعريف </a></li>
+															</ul>
+
+														</div>
+
+													</div>
+												</div>
+
+												<div class="container">
+														
+													<div class="tab-content mb-3" id="pills-tabcontent">
+													  
+													   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+														  	<div class="container">
+															  {{training.content|safe}} 
+															</div>
+														</div>
+													  
+													  
+															
+													  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+															<div class="container">
+														{% for section  in sections %}
+																<div class="accordion" id="accordionExample">
+																	<div class="">
+																		<div class="" id="headingsection{{section.pk}}">
+																		  <h5 class="mb-0 card_border">
+																		    <button class="btn" type="button" data-toggle="collapse" data-target="#collapse{{section.id}}" aria-expanded="true" aria-controls="collapse{{section.id}}">
+																		      {{section.title}}  <i class="fa fa-chevron-left ml-3"></i>
+																		    </button>
+																		  </h5>
+																		</div>
+
+																		<div id="collapse{{section.id}}" class="collapse " aria-labelledby="headingsection{{section.pk}}" data-parent="#accordionExample">
+																		  <div class="card-body">
+																		   		<div class="accordion" id="accordionExample2">
+																				 
+																				 {% for course in section.course_set.all %}
+																				 	
+																				    <div class="card_border">
+																				        
+																				        <a href="{% url 'course_detail' course_pk=course.pk %}" class="btn btn-link text-right" style="width: 100%">	
+																				        	{% if active %}
+																				          			<i class="fa fa-unlock-alt float-left"></i>
+																				        	
+																				        	{% else %}
+																				        	    {% if course.opened %}
+																				          			<i class="fa fa-unlock-alt float-left"></i>
+																				        	    
+																				        	    {% else %}
+																				        	            
+																				        	   
+																				          			<i class="fa fa-lock float-left"></i>
+																				        	    {% endif %}
+																				          	{% endif %}{{course.title}} 
+																				          	<i class="fa fa-arrow-left ml-3"></i>
+																				        </a>
+																				    </div>
+																				    
+
+																				 {% endfor %}
+
+																				</div>
+
+																		  </div>
+																		</div>
+																	</div>
+																  
+																</div>
+														{% endfor %}
+																
+															</div>
+													  </div>
+
+													</div>
+												</div>
+											</div>
+						
+											 
+											 
+									</div>
+								</div>
+						</div>
+
+					</div>
+
+				<!-- start sidebar -->
+					<div class="sidebar wow  col-lg-4 col-md-12"  >
+						<aside>
+							<div class="sidebar-item search" data-aos="fade-left">
+								<div class="sidebar-info">
+									<form method="get">
+										<input type="text" name="keyword" class="form-control" value="{{request.get.keyword}}">
+										<button type="submit"><i class="fas fa-chevron-down"></i></button>
+									</form>
+								</div>
+							</div>
+							<div class="sidebar-item recent-post float-right text-right" data-aos="fade-left">
+								<div class="title ">
+									<h4>آخر الدورات</h4>
+								</div>
+								<ul>
+									{% for training in last_trainings %}
+										
+									<li class="float-right">
+										<div class="info">
+											<a href="{% url 'training_detail' training_pk=training.pk %}">{{training.title}}</a>
+											<div class="meta-title">
+												<span class="training-date"><i class="fas fa-calendar-alt"></i>{{training.created_on}}</span>
+											</div>
+										</div>
+										<div class="thumb">
+											<a href="{% url 'training_detail' training_pk=training.pk %}">
+												{% if training.image %}
+
+													<img src="{{training.image.url}}" alt="thumb">
+												{% endif %}
+											</a>
+										</div>
+									</li>
+									
+									{% endfor %}
+								</ul>
+							</div>
+							
+							<div class="sidebar-item social-sidebar float-right text-right" data-aos="fade-left">
+								<div class="title">
+									<h4>تابعونا</h4>
+								</div>
+								<div class="sidebar-info float-right">
+									<ul>
+										<li class="facebook">
+											<a href="{{contact.facebook}}">
+												<i class="fab fa-facebook-f"></i>
+											</a>
+										</li>
+										<li class="instagram">
+											<a href="{{contact.instagram}}">
+												<i class="fab fa-instagram"></i>
+											</a>
+										</li>
+										<li class="g-plus">
+											<a href="{{contact.youtube}}">
+												<i class="fab fa-youtube"></i>
+											</a>
+										</li>
+										<li class="twitter">
+											<a href="{{contact.twitter}}">
+												<i class="fab fa-twitter"></i>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</aside>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+{% include 'base/footer.html'  with contact=contact  content=content %}  
+
+{% endblock body %}
+
+{% block script %}
+    <script type="text/javascript">
+    	
+    	$('.collapse').on('shown.bs.collapse', function(){
+		$(this).parent().find(".fa-chevron-left").removeClass("fa-chevron-left").addClass("fa-chevron-down");
+		}).on('hidden.bs.collapse', function(){
+		$(this).parent().find(".fa-chevron-down").removeClass("fa-chevron-down").addClass("fa-chevron-left");
+		});
+    </script>
+{% endblock script %}
+							

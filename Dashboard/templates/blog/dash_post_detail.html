@@ -1,0 +1,80 @@
+{% extends "dash_base/base.html" %}
+{% load static %}
+{% block page_title %}{{post.title}}{% endblock page_title %}
+{% block title %}
+    {{post.title}}
+{% endblock title %}
+{% block breadcrumb %}
+    <li class=""><a href="{% url 'all_posts' %}">جميع المقالات </a></li>
+    <li class="active">{{post.title}} </li>
+    
+{% endblock  %}
+
+{% block body %}
+
+<div class="col-md-12">
+    {% for message in messages %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+            <div class="alert alert-success" role="alert">{{message}}</div>
+        {% else %}
+            <div class="alert alert-danger" role="alert">{{message}}</div>
+            
+        {% endif %}
+    {% endfor %}
+</div>
+<div class="col-md-12">
+    <div class="panel panel-card recent-activites">
+        <!-- Start .panel -->
+        <div class="panel-heading">
+            <h4 class="panel-title">تفاصيل  المقال</h4>
+            <div class="panel-actions">
+                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                <!-- <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss=""></a> -->
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+            	<form method="POST" enctype="multipart/form-data">{% csrf_token %}
+            		<div class="col-md-12">
+	            			
+			        	{{form.media }}
+					    {{form.as_p }}
+					    <input type="submit" name="post" value="تعديل" class="btn btn-sm btn-primary pull-right m-t-n-xs"> 
+                        <a href="#" data-toggle="modal" data-target="#exampleModal{{post.pk}}" class="btn btn-danger">حذف</a>
+                                    <div class="modal fade " id="exampleModal{{post.pk}}" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel">
+                                      <div class="modal-dialog modal-sm" role="document">
+                                            <div class="modal-content" style="    margin-top: 100px;">
+                                              <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="exampleModalLabel">حذف دورة</h4>
+                                              </div>
+                                              <div class="modal-body">
+                                                   <p>هل أنت متاكد من حذف {{post.title}}؟</p>
+                                              </div>
+                                              <div class="modal-footer">
+                                                <!-- <button type="button" class="btn btn-primary">حذف</button> -->
+                                                <a href="{% url 'del_post' pk=post.pk %}" class="btn btn-sm btn-danger">نعم</a>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">إغلاق</button>
+                                              </div>
+                                            </div>
+                                      </div>
+                                    </div>           		
+					</div>
+            	</form>
+
+      		</div>
+
+        </div>
+    </div><!-- End .panel --> 
+</div>
+{% endblock body %}
+
+
+
+{% block script %}
+    <script src="{% static 'dashboard/js/data-tables/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'dashboard/js/data-tables/dataTables.tableTools.js' %}"></script>
+    <script src="{% static 'dashboard/js/data-tables/dataTables.bootstrap.js' %}"></script>
+    <script src="{% static 'dashboard/js/data-tables/dataTables.responsive.js' %}"></script>
+    <script src="{% static 'dashboard/js/data-tables/tables-data.js' %}"></script>
+{% endblock script %}

@@ -1,0 +1,73 @@
+
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}
+    الملف الشخصي
+{% endblock title %}
+{% block link %}
+    
+        <link href="{% static 'css/datepicker3.css' %}" rel="stylesheet" type="text/css"/>
+{% endblock link %}
+
+{% block body %}
+{% include 'base/header.html' with contact=contact  content=content  %}    
+
+ <div class="container default-padding-top	">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="site-heading text-center">
+                        <h1>الملف الشخصي</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+<div class="container default-padding-bottom">
+	
+	<div class="col-md-6 col-sm-10 col-md-offset-3 col-sm-offset-1 mx-auto text-right">
+		{% for message in messages %}
+			{% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+				<div class="alert alert-success" role="alert">{{message}}</div>
+			{% else %}
+				<div class="alert alert-danger" role="alert">{{message}}</div>
+			    
+			{% endif %}
+		{% endfor %}
+		<form method="POST" enctype="multipart/form-data"> {% csrf_token %}
+
+			{{user_form.as_p}}
+			{{profile_form.as_p}}
+			{% for field in profile_form %}
+				{% if field.errors %}
+				    
+			   	<div class="alert alert-danger" role="alert">{{ field.errors }}</div>
+				
+				{% endif %}
+			        
+			{% endfor %}
+			{% for field in user_form %}
+	
+			    	{% if field.errors %}
+				    
+			   	<div class="alert alert-danger" role="alert">{{ field.errors }}</div>
+				
+				{% endif %}
+			{% endfor %}
+			<input type="submit" class ="btn btn-success" value="تعديل">
+		</form>
+
+	</div>
+</div>
+
+{% include 'base/footer.html'  with content=content contact=contact %}    
+    
+{% endblock body %}
+
+
+{% block script %}
+        <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+        <script type="text/javascript">
+        	$('.datepicker').datepicker({
+			    format: 'dd/mm/yyyy',
+			});
+        </script>
+{% endblock script %}
