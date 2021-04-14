@@ -79,10 +79,13 @@
 								 <div class="comments-title ">
 
 							 		{% if comments %}
-										<h4 class="">Commentaires ({{nb_comments}})</h4>
+										<h4 class="">Comments ({{nb_comments}})</h4>
 									{% else %}
-									 	<h4 class="text-right">Aucun Commentaire </h4>
-									 	<p>Inscrivez vous pour ajouter un commentaire</p>
+									 	<h4 class="text-right">No comment yet </h4>
+									 	<div class="container">
+									 		<p>Login <a href="{% url 'login' %}">here</a> to leave a comment</p>
+									 		
+									 	</div>
 										    
 							 		{% endif %}
 									  <div class="comments-list">
@@ -120,7 +123,7 @@
 								 
 									 <div class="comments-form">
 										 <div class="title">
-											 <h4>Commentez</h4>
+											 <h4>Comment</h4>
 										 </div>
 										 <form method="POST" class="contact-comments ">{% csrf_token %}
 											 <div class="row">
@@ -135,7 +138,7 @@
 													 </div>
 													 <div class="form-group full-width submit ">
 														 <button type="submit">
-															 Commentez
+															 Leave Comment
 														 </button>
 													 </div>
 												 </div>
@@ -163,7 +166,7 @@
 							</div>
 							<div class="sidebar-item recent-post" data-aos="fade-left">
 								<div class="title ">
-									<h4>Derniers articles</h4>
+									<h4>Last articles</h4>
 								</div>
 								<ul>
 									{% for post in last_posts %}
@@ -191,7 +194,7 @@
 							</div>
 							<div class="sidebar-item category " data-aos="fade-left">
                                 <div class="title ">
-                                    <h4 class="">Categorie</h4>
+                                    <h4 class="">Categories</h4>
                                 </div>
                                 <div class="row sidebar-info">
                                     <ul class="">
@@ -207,7 +210,7 @@
                             </div>
                             <div class="sidebar-item social-sidebar" data-aos="fade-left">
                                 <div class="title">
-                                    <h4>Suivez nous</h4>
+                                    <h4>Follow Us</h4>
                                 </div>
                                 <div class="sidebar-info ">
                                     <ul>

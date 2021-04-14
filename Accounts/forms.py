@@ -13,10 +13,10 @@ class UserLoginForm(AuthenticationForm):
 	def __init__(self, *args, **kwargs):
 		super(UserLoginForm, self).__init__(*args, **kwargs)
 
-	username = forms.EmailField(label= 'إسم المستخدم',widget=forms.TextInput(
-		attrs={'class': 'form-control text-right text-right', 'type': 'email', 'name': 'email', '': 'Email'}))
-	password = forms.CharField(label= 'كلمه السر',widget=forms.PasswordInput(
-		attrs={'class': 'form-control text-right','autofocus': True ,'': 'Mot de passe', }))
+	username = forms.EmailField(label= 'Email',widget=forms.TextInput(
+		attrs={'class': 'form-control', 'type': 'email', 'name': 'email', '': 'Email'}))
+	password = forms.CharField(label= 'Password',widget=forms.PasswordInput(
+		attrs={'class': 'form-control','autofocus': True ,'': 'Mot de passe', }))
 
 
 
@@ -24,23 +24,23 @@ class ResetPasswordForm(PasswordResetForm):
 	def __init__(self, *args, **kwargs):
 		super(PasswordResetForm, self).__init__(*args, **kwargs)
 
-	email = forms.EmailField(label= 'إسم المستخدم',widget=forms.TextInput(
-		attrs={'class': 'form-control text-right', 'type': 'email', '': 'Votre adresse e-mail :', }))
+	email = forms.EmailField(label= 'Email',widget=forms.TextInput(
+		attrs={'class': 'form-control', 'type': 'email', '': 'Votre adresse e-mail :', }))
    
 
 
 class PasswordSetForm(SetPasswordForm):
    
 	new_password1 = forms.CharField(
-		label= 'كلمة السر الجديدة',
-		widget=forms.PasswordInput(attrs={'class': 'form-control text-right' , '': 'Le nouveau mot de passe :' , }),
+		label= 'New Password ',
+		widget=forms.PasswordInput(attrs={'class': 'form-control' , '': 'Le nouveau mot de passe :' , }),
 		strip=False,
 		help_text=password_validation.password_validators_help_text_html(),
 	)
 	new_password2 = forms.CharField(
 		strip=False,
-		label='تأكيد كلمة السر الجديدة',
-		widget=forms.PasswordInput(attrs={'class': 'form-control text-right', '': 'Confirmez le nouveau mot de passe :'}),
+		label='New Password',
+		widget=forms.PasswordInput(attrs={'class': 'form-control', '': 'Confirmez le nouveau mot de passe :'}),
 	)
 
 
@@ -49,36 +49,36 @@ class ChangePasswordForm(PasswordChangeForm):
 		super(PasswordChangeForm, self).__init__(*args, **kwargs)
 
 	old_password = forms.CharField(
-		label= 'كلمة السر القديمة',
-		widget=forms.PasswordInput(attrs={'class': 'form-control text-right', '':"Ancien mot de passe :"}),
+		label= 'New Password ',
+		widget=forms.PasswordInput(attrs={'class': 'form-control', '':"Ancien mot de passe :"}),
 		strip=False,
 		help_text=password_validation.password_validators_help_text_html(),
 	)
 	new_password1 = forms.CharField(
 		strip=False,
-		label= 'كلمة السر الجديدة',
-		widget=forms.PasswordInput(attrs={'class': 'form-control text-right', '':"Le nouveau mot de passe :"}),
+		label= 'New Password ',
+		widget=forms.PasswordInput(attrs={'class': 'form-control', '':"Le nouveau mot de passe :"}),
 	)
 
 	new_password2 = forms.CharField(
 		strip=False,
-		label='تأكيد كلمة السر الجديدة',
-		widget=forms.PasswordInput(attrs={'class': 'form-control text-right', '':"Confirmez le nouveau mot de passe :"}),
+		label='Confirm new password',
+		widget=forms.PasswordInput(attrs={'class': 'form-control', '':"Confirmez le nouveau mot de passe :"}),
 	)
 
 #--------------user creation form-----------------
 class RegistrationForm(UserCreationForm):
-	email = forms.EmailField(label= 'إسم المستخدم',required=True)
-	name = forms.CharField(label= 'الإسم ',required=True)
-	lastname = forms.CharField(label= 'اللقب',required=True)
+	email = forms.EmailField(label= 'Email',required=True)
+	name = forms.CharField(label= 'Name',required=True)
+	lastname = forms.CharField(label= 'Lastname',required=True)
 	password1 = forms.CharField(
-		label = 'كلمة السر',
+		label = 'Password',
 		strip=False,
 		widget=forms.PasswordInput,
 
 	)
 	password2 = forms.CharField(
-		label = 'تأكيد كلمة السر الجديدة',
+		label = 'New Password',
 		strip=False,
 		widget=forms.PasswordInput,
 
@@ -86,11 +86,11 @@ class RegistrationForm(UserCreationForm):
 
 
 
-	email.widget.attrs.update({'class': 'form-control text-right','autofocus': True ,'':'E-mail'})
-	name.widget.attrs.update({'class': 'form-control text-right','autofocus': True ,'':'Prénom'})
-	lastname.widget.attrs.update({'class': 'form-control text-right','autofocus': True ,'':'Nom'})
-	password1.widget.attrs.update({'class': 'form-control text-right','autofocus': True, '':'Mot de passe'})
-	password2.widget.attrs.update({'class': 'form-control text-right','autofocus': True , '':'Confirmé le Mot de passe' })
+	email.widget.attrs.update({'class': 'form-control','autofocus': True ,'':'E-mail'})
+	name.widget.attrs.update({'class': 'form-control','autofocus': True ,'':'Prénom'})
+	lastname.widget.attrs.update({'class': 'form-control','autofocus': True ,'':'Nom'})
+	password1.widget.attrs.update({'class': 'form-control','autofocus': True, '':'Mot de passe'})
+	password2.widget.attrs.update({'class': 'form-control','autofocus': True , '':'Confirmé le Mot de passe' })
 	
 	class Meta:
 		model = User
@@ -124,8 +124,8 @@ class RegistrationForm(UserCreationForm):
 
 
 class RegisterForm(forms.ModelForm):
-	password1 = forms.CharField(label=' كلمة السر ا',widget=forms.PasswordInput)
-	password2 = forms.CharField(label='تأكيد كلمة السر الجديدة', widget=forms.PasswordInput)
+	password1 = forms.CharField(label=' Password ا',widget=forms.PasswordInput)
+	password2 = forms.CharField(label='New Password', widget=forms.PasswordInput)
 
 	class Meta:
 		model = User
@@ -151,17 +151,17 @@ class RegisterForm(forms.ModelForm):
 class UserAdminCreationForm(forms.ModelForm):
 	"""A form for creating new users. Includes all the required
 	fields, plus a repeated password."""
-	email = forms.EmailField(label= 'إسم المستخدم',required=True)
-	name = forms.CharField(label= 'الإسم ',required=True)
-	lastname = forms.CharField(label= 'اللقب',required=True)
+	email = forms.EmailField(label= 'Email',required=True)
+	name = forms.CharField(label= 'Name',required=True)
+	lastname = forms.CharField(label= 'Lastname',required=True)
 	password1 = forms.CharField(
-		label = 'كلمة السر',
+		label = 'Password',
 		strip=False,
 		widget=forms.PasswordInput,
 
 	)
 	password2 = forms.CharField(
-		label = 'تأكيد كلمة السر الجديدة',
+		label = 'New Password',
 		strip=False,
 		widget=forms.PasswordInput,
 
@@ -169,11 +169,11 @@ class UserAdminCreationForm(forms.ModelForm):
 
 
 
-	email.widget.attrs.update({'class': 'form-control text-right','autofocus': True ,'':'E-mail'})
-	name.widget.attrs.update({'class': 'form-control text-right','autofocus': True ,'':'Prénom'})
-	lastname.widget.attrs.update({'class': 'form-control text-right','autofocus': True ,'':'Nom'})
-	password1.widget.attrs.update({'class': 'form-control text-right','autofocus': True, '':'Mot de passe'})
-	password2.widget.attrs.update({'class': 'form-control text-right','autofocus': True , '':'Confirmé le Mot de passe' })
+	email.widget.attrs.update({'class': 'form-control','autofocus': True ,'':'E-mail'})
+	name.widget.attrs.update({'class': 'form-control','autofocus': True ,'':'Prénom'})
+	lastname.widget.attrs.update({'class': 'form-control','autofocus': True ,'':'Nom'})
+	password1.widget.attrs.update({'class': 'form-control','autofocus': True, '':'Mot de passe'})
+	password2.widget.attrs.update({'class': 'form-control','autofocus': True , '':'Confirmé le Mot de passe' })
 	
 	class Meta:
 		model = User
@@ -202,16 +202,16 @@ class UserAdminChangeForm(forms.ModelForm):
 	password hash display field.
 	"""
 	password = ReadOnlyPasswordHashField()
-	email = forms.EmailField(label= 'إسم المستخدم',required=True)
-	name = forms.CharField(label= 'الإسم ',required=True)
-	lastname = forms.CharField(label= 'اللقب',required=True)
+	email = forms.EmailField(label= 'Email',required=True)
+	name = forms.CharField(label= 'Name',required=True)
+	lastname = forms.CharField(label= 'Lastname',required=True)
 	
 
 
 
-	email.widget.attrs.update({'class': 'form-control text-right','autofocus': True ,'':'E-mail'})
-	name.widget.attrs.update({'class': 'form-control text-right','autofocus': True ,'':'Prénom'})
-	lastname.widget.attrs.update({'class': 'form-control text-right','autofocus': True ,'':'Nom'})
+	email.widget.attrs.update({'class': 'form-control','autofocus': True ,'':'E-mail'})
+	name.widget.attrs.update({'class': 'form-control','autofocus': True ,'':'Prénom'})
+	lastname.widget.attrs.update({'class': 'form-control','autofocus': True ,'':'Nom'})
 	
 	class Meta:
 		model = User
@@ -230,12 +230,12 @@ class UserAdminChangeForm(forms.ModelForm):
 class ProfileUpdateForm(forms.ModelForm):
    
 	choices = (
-		('ذكر','ذكر'),
-		('أنثى','أنثى')
+		('Male','Male'),
+		('Female','Female')
 		)
-	birth_date = forms.DateField(label= 'تاريخ الميلاد' ,widget=forms.DateInput(format='%d/%m/%Y',attrs={'class': 'form-control datepicker'}), required = False )
+	birth_date = forms.DateField(label= 'Birthdate' ,widget=forms.DateInput(format='%d/%m/%Y',attrs={'class': 'form-control datepicker'}), required = False )
 	
-	gender = forms.CharField(label= 'جنس ' ,widget=forms.Select(attrs={'class': 'form-control selectpicker'  } ,choices=choices ),required = False)
+	gender = forms.CharField(label= 'Gender ' ,widget=forms.Select(attrs={'class': 'form-control selectpicker'  } ,choices=choices ),required = False)
 	
 
 	class Meta:
@@ -251,8 +251,8 @@ class ProfileUpdateForm(forms.ModelForm):
 
 
 class UserUpdateForm(forms.ModelForm):
-	name = forms.CharField(label= 'الإسم' ,widget=forms.TextInput(attrs={'class': 'form-control text-right'}), required = True)
-	lastname = forms.CharField(label= 'اللقب' ,widget=forms.TextInput(attrs={'class': 'form-control text-right'}), required = True)
+	name = forms.CharField(label= 'Name' ,widget=forms.TextInput(attrs={'class': 'form-control'}), required = True)
+	lastname = forms.CharField(label= 'Lastname' ,widget=forms.TextInput(attrs={'class': 'form-control'}), required = True)
 	
 
 	class Meta:
@@ -265,8 +265,8 @@ class UserUpdateForm(forms.ModelForm):
 
 
 class ContactUsForm (forms.Form):
-	name = forms.CharField(label= 'الإسم' ,widget=forms.TextInput(attrs={'class': 'form-control ','placeholder': 'Nom',}), required = True)
+	name = forms.CharField(label= 'الإسم' ,widget=forms.TextInput(attrs={'class': 'form-control ','placeholder': 'Name',}), required = True)
 	phone = forms.CharField(label= 'الهاتف' ,widget=forms.TextInput(attrs={'class': 'form-control ','placeholder': 'Tel',}), required = True)
 	email = forms.EmailField(label= 'Email' ,widget=forms.EmailInput(attrs={'class': 'form-control ','placeholder': 'Email',}), required = True)
-	comments = forms.CharField(label= 'التعليق' ,widget=forms.Textarea(attrs={'class': 'form-control','placeholder': 'Sujet',}), required = True)
+	comments = forms.CharField(label= 'التعليق' ,widget=forms.Textarea(attrs={'class': 'form-control','placeholder': 'Subject',}), required = True)
 	

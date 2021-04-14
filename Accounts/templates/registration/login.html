@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    تسجيل الدخول
+	Log in
 {% endblock title %}
 
 {% block body %}
@@ -13,20 +13,20 @@
 	            <div class="row">
 	                <div class="col-lg-8 offset-lg-2">
 	                    <div class="site-heading text-center">
-	                        <h1>تسجيل الدخول </h1>
+	                        <h1>Log in</h1>
 	                    </div>
 	                </div>
 	            </div>
 	        </div>
 	<div class="container default-padding-bottom">
-		<div class="col-md-6 col-sm-10 col-md-offset-3 col-sm-offset-1 mx-auto text-right">
+		<div class="col-md-6 col-sm-10 col-md-offset-3 col-sm-offset-1 mx-auto">
 
 			<form method="POST"> {% csrf_token %}
 
 				{{form.as_p}}
-				<a href="{% url 'password_reset' %}">نسيت كلمة السر؟</a>
+				<a href="{% url 'password_reset' %}">forgot the password?</a>
 				<br>
-				<input type="submit" class ="btn btn-success" value="أدخل">
+				<input type="submit" class ="btn btn-success" value="Login">
 			</form>
 
 		</div>
