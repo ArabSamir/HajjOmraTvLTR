@@ -18,7 +18,7 @@
 				<div class="col-lg-12">
 					<h2>Blog</h2>
 					<ul class="breadcrumb">
-						<li ><a href="{% url 'index' %}"><i class="fas fa-home"></i> Acceuil</a></li>
+						<li ><a href="{% url 'index' %}"><i class="fas fa-home"></i> Home</a></li>
 						<li class="active">Blog</li>
 						
 					</ul>
@@ -64,7 +64,7 @@
 													<p> {{post.description}}</p>
 													<div class="bottom">
 														
-														<a class="btn circle btn-theme effect btn-md" href="{% url 'post_detail' pk=post.pk %}">Lire la suite</a>
+														<a class="btn circle btn-theme effect btn-md" href="{% url 'post_detail' pk=post.pk %}">Read More</a>
 													</div>
 												</div>
 											</div>
@@ -73,7 +73,7 @@
 									{% endfor %} 
 								</div>
 					   		{% else %}
-  								<div class="alert alert-danger" role="alert">Aucun Post trouve</div>
+  								<div class="alert alert-danger" role="alert">No Post Found</div>
 							{% endif %}
 						
 						{% if posts %}
@@ -117,7 +117,7 @@
 							</div>
 							<div class="sidebar-item recent-post" data-aos="fade-left">
 								<div class="title ">
-									<h4>Derniers articles</h4>
+									<h4>Last articles</h4>
 								</div>
 								<ul>
 									{% for post in last_posts %}
@@ -145,7 +145,7 @@
 							</div>
 							<div class="sidebar-item category " data-aos="fade-left">
                                 <div class="title ">
-                                    <h4 class="">Categorie</h4>
+                                    <h4 class="">Categories</h4>
                                 </div>
                                 <div class="row sidebar-info">
                                     <ul class="">
@@ -161,7 +161,7 @@
                             </div>
                             <div class="sidebar-item social-sidebar" data-aos="fade-left">
                                 <div class="title">
-                                    <h4>Suivez nous</h4>
+                                    <h4>Follow Us</h4>
                                 </div>
                                 <div class="sidebar-info ">
                                     <ul>

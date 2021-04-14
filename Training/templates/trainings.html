@@ -12,10 +12,10 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-					<h2>Formations</h2>
+					<h2>Trainings</h2>
 					<ul class="breadcrumb">
-						<li ><a href="{% url 'index' %}"><i class="fas fa-home"></i> Acceuil  </a></li>
-						<li class="active">Formation</li>
+						<li ><a href="{% url 'index' %}"><i class="fas fa-home"></i> Home  </a></li>
+						<li class="active">Trainings</li>
 						
 					</ul>
 				</div>
@@ -52,7 +52,7 @@
 	                                        <a href="{% url 'training_detail' training_pk=training.pk %}" >
 	                                            <img src="{{training.image.url}}"  alt="Thumb">
 	                                        </a>
-	                                        <div class="date product_item_span_detail"><span class="product_item_span">Prix : {{training.price_dzd}} DZD - {{training.price}} € </span></div>
+	                                        <div class="date product_item_span_detail"><span class="product_item_span">Price : {{training.price_dzd}} DZD - {{training.price}} € </span></div>
 	                                    </div>
 	                                    <div class="info product_info">
 	                                        <div class="meta">
@@ -61,7 +61,7 @@
 	                                        <p class="">
 	                                            <a href="{% url 'training_detail' training_pk=training.pk %}" class="product_description">{{training.description}}</a>
 	                                        </p>
-	                                        <a class="btn-more product_buy" href="{% url 'payment' pk=training.pk %}">Achetez<i class="fas fa-long-arrow-alt-right"></i></a>
+	                                        <a class="btn-more product_buy" href="{% url 'payment' pk=training.pk %}">Buy<i class="fas fa-long-arrow-alt-right"></i></a>
 	                                    </div>
 	                                </div>
 	                            </div>
@@ -71,7 +71,7 @@
 						    </div>
 
 					   		{% else %}
-  								<div class="alert alert-danger text-right" role="alert">Aucune Formation</div>
+  								<div class="alert alert-danger text-right" role="alert">No Training</div>
 							{% endif %}
 
                            

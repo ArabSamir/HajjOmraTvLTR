@@ -20,7 +20,7 @@
 	<div class="blog-area grid-colum default-padding" >
 		<div class="container">
 			{% if exists and not active %}
-                                    <div class="alert alert-danger text-right" role="alert">لم يتم تفعيل الدورة بعد</div>
+                                    <div class="alert alert-danger text-right" role="alert">The course has not yet been activated</div>
 			{% endif %}
 			{% for message in messages %}
                                 {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
@@ -48,8 +48,8 @@
 										  {% endif %}
 										  {% if not exists %}
 										      
-										  <div class="date product_item_span_detail"><span class="product_item_span">$ {{training.price}} :السعر</span></div>
-										  <a href="{% url 'payment' pk=training.pk %}" class="product_item_buy btn btn-success">أشتري <i class="fa fa-credit-card ml-3"></i></a>
+										  <div class="date product_item_span_detail"><span class="product_item_span">Price : {{training.price_dzd}} DZD - {{training.price}} € </span></div>
+										  <a href="{% url 'payment' pk=training.pk %}" class="product_item_buy btn btn-success">Buy <i class="fa fa-credit-card ml-3"></i></a>
 										  
 										  {% endif %}
 										</div>
@@ -70,9 +70,9 @@
 																
 																
 																<li class="nav-item ">
-																	<a class="nav-link nav_tab " id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-profile" aria-selected="false" href="#">المحتوى </a></li>
+																	<a class="nav-link nav_tab " id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-profile" aria-selected="false" href="#">Content </a></li>
 																<li class=" nav-item  ">
-																	<a class="nav-link nav_tab active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-profile" aria-selected="false" href="#">التعريف </a></li>
+																	<a class="nav-link nav_tab active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-profile" aria-selected="false" href="#">Definition </a></li>
 															</ul>
 
 														</div>
@@ -171,7 +171,7 @@
 							</div>
 							<div class="sidebar-item recent-post float-right text-right" data-aos="fade-left">
 								<div class="title ">
-									<h4>آخر الدورات</h4>
+									<h4>Last Courses</h4>
 								</div>
 								<ul>
 									{% for training in last_trainings %}
@@ -199,7 +199,7 @@
 							
 							<div class="sidebar-item social-sidebar float-right text-right" data-aos="fade-left">
 								<div class="title">
-									<h4>تابعونا</h4>
+									<h4>Follow us</h4>
 								</div>
 								<div class="sidebar-info float-right">
 									<ul>

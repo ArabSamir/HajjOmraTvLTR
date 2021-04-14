@@ -36,7 +36,7 @@
                                           {% endif %}
                                           {% if not active %}
                                               
-                                          <div class="date product_item_span_detail"><span class="product_item_span">Prix : {{training.price_dzd}} DZD  - {{training.price}} €</span></div>
+                                          <div class="date product_item_span_detail"><span class="product_item_span">Price : {{training.price_dzd}} DZD  - {{training.price}} €</span></div>
                                           
                                           {% endif %}
                                         </div>
@@ -56,10 +56,10 @@
                                                             <ul class="nav navbar-nav nav-pills  mb-3" id="pills-tab" role="tablist">
                                                                 
                                                                 <li class=" nav-item  ">
-                                                                    <a class="nav-link nav_tab active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-profile" aria-selected="false" href="#">Définition </a></li>
+                                                                    <a class="nav-link nav_tab active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-profile" aria-selected="false" href="#">Definition </a></li>
                                                             
                                                                 <li class="nav-item ">
-                                                                    <a class="nav-link nav_tab " id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-profile" aria-selected="false" href="#">Contenu </a></li>
+                                                                    <a class="nav-link nav_tab " id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-profile" aria-selected="false" href="#">Content </a></li>
                                                                 </ul>
 
                                                         </div>
@@ -155,23 +155,23 @@
                             </div>
                             <div class="container"><div class="sidebar-item recent-post " data-aos="fade-left">
                                 <div class="title ">
-                                    <h4>Commandez maintenant :</h4>
+                                    <h4>Order Now :</h4>
                                 </div>
                                 <div class="title ">
-                                <h5>Par CCP : </h5>
+                                <h5>By CCP : </h5>
                                 </div>
                                 <div class="container mb-3">
                                     
-                                <h5>Prix {{training.price_dzd}} DZ</h5>
+                                <h5>Price {{training.price_dzd}} DZD</h5>
                                 <label>Numero de compte : {{content.ccp}}</label>
 
                                 </div>
                                 <div class="title ">
-                                <h5>Par PayPal :</h5>
+                                <h5>By PayPal :</h5>
                                 </div>
                                 <div class="container">
                                     
-                                <h5>Prix {{training.price}}  €:</h5>
+                                <h5>Price {{training.price}}  €:</h5>
                                 <div id="paypal-button-container"></div>
                                 </div>
                             </div></div>
@@ -218,7 +218,7 @@
             onApprove: function(data, actions) {
                 return actions.order.capture().then(function(details) {
                     // Show a success message to the buyer
-                    alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                    // alert('Transaction completed by ' + details.payer.name.given_name + '!');
                     CompletePayment(data , details)
                     window.location = '{% url "completed" %}';
                 });

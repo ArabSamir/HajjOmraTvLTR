@@ -12,10 +12,10 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-					<h2>الدورات</h2>
+					<h2>Trainings</h2>
 					<ul class="breadcrumb">
-						<li class="active">دوراتي</li>
-						<li ><a href="{% url 'index' %}">االرئيسية  <i class="fas fa-home"></i></a></li>
+						<li class="active">My trainings</li>
+						<li ><a href="{% url 'index' %}">Home<i class="fas fa-home"></i></a></li>
 					</ul>
 				</div>
 			</div>
@@ -54,14 +54,14 @@
 			                                        </a>
 			                                        <!-- <div class="date product_item"><span class="product_item_span">{{user_training.training.price}} $</span></div> -->
 			                                    </div>
-			                                    <div class="info text-right product_info">
+			                                    <div class="info product_info">
 			                                        <div class="meta">
-			                                             <h3 class="text-right"><a href="{% url 'training_detail' training_pk=user_training.training.pk %}">{{user_training.training.title}}</a></h3>
+			                                             <h3 class=""><a href="{% url 'training_detail' training_pk=user_training.training.pk %}">{{user_training.training.title}}</a></h3>
 			                                        </div>
 			                                        <p class="text-right">
 			                                            <a href="{% url 'training_detail' training_pk=user_training.training.pk %}" class="product_description">{{user_training.training.description}}</a>
 			                                        </p>
-			                                        <a class="btn-more product_buy" href="{% url 'training_detail' training_pk=user_training.training.pk %}">التفاصيل<i class="fas fa-long-arrow-alt-right"></i></a>
+			                                        <a class="btn-more product_buy" href="{% url 'training_detail' training_pk=user_training.training.pk %}"><i class="fas fa-long-arrow-alt-left"></i> Details</a>
 			                                    </div>
 			                                </div>
 			                            </div>
@@ -71,7 +71,7 @@
 							    </div>
 
 					   		{% else %}
-  								<div class="alert alert-danger text-right" role="alert">لم يتم العثور على أي   دورة</div>
+  								<div class="alert alert-danger" role="alert">No course was found</div>
 							{% endif %}
 
                            

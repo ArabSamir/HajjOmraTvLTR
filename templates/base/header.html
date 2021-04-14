@@ -15,7 +15,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-lg-6 text-right item-flex">
+                <div class="col-lg-6  item-flex">
                    <!--  <div class="info">
                         <ul>
                             <li>
@@ -87,11 +87,11 @@
                     </div>
                     <!-- End Header Navigation -->
                     <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse float-right" id="navbar-menu">
+                    <div class="collapse navbar-collapse " id="navbar-menu">
                         <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
                             
                             <li class="dropdown">
-                                <a href="{% url 'index' %}" >Accueil</a>
+                                <a href="{% url 'index' %}" >Home</a>
                                 
                             </li>
                             
@@ -100,15 +100,15 @@
                                 
                             </li>
                             <li class="dropdown">
-                                <a href="{% url 'trainings' %}">Formation</a>
+                                <a href="{% url 'trainings' %}">Trainings</a>
                                 
                             </li>
                             
                             <li>
-                                <a href="{% if request.resolver_match.url_name == 'index' %}#about_us{% else %}{% url 'index' %}#about_us{% endif %}">À propos</a>
+                                <a href="{% if request.resolver_match.url_name == 'index' %}#about_us{% else %}{% url 'index' %}#about_us{% endif %}">About Us</a>
                             </li>
                             <li>
-                                <a href="{% if request.resolver_match.url_name == 'index' %}#contact{% else %}{% url 'index' %}#contact{% endif %}">contactez nous</a>
+                                <a href="{% if request.resolver_match.url_name == 'index' %}#contact{% else %}{% url 'index' %}#contact{% endif %}">contact Us</a>
                             </li>
                             {% if request.user.is_authenticated %}
                                 <div class="navbar-header ">
@@ -119,14 +119,14 @@
 
                                         <ul class="dropdown-menu">
                                             <li class="dropdown ">
-                                                <a href="{% url 'profile' %}"  class="text-right">الملف الشخصي</a>
-                                                <a href="{% url 'my_trainings' %}"  class="text-right">دوراتي</a>
+                                                <a href="{% url 'profile' %}"  class="">Profile</a>
+                                                <a href="{% url 'my_trainings' %}"  class="">My Trainings</a>
                                             </li>
                                             <li class="dropdown ">
-                                                <a href="{% url 'change_password' %}"  class="text-right">تغيير كلمة السر</a>
+                                                <a href="{% url 'change_password' %}"  class="">Change Password</a>
                                             </li>
                                             <li class="dropdown ">
-                                                <a href="{% url 'logout' %}"  class="text-right">تسجيل الخروج</a>
+                                                <a href="{% url 'logout' %}"  class="">Logout</a>
                                             </li>
                                         </ul>
                                     </li>
@@ -178,7 +178,7 @@
                                             <h2 data-animation="animated slideInRight">{{content.header_title}}</h2>
                                              <p  data-animation="animated slideInLeft">{{content.header_description}}</p>
                                             <a class="btn btn-info" style="color: #000;"  href="https://www.youtube.com/watch?v=owhuBrGIOsE">
-                                                Abonnez-vous avec nous
+                                               Subscribe
                                             </a>
                                         </div>
                                     </div>
@@ -201,7 +201,7 @@
      data-aos-duration="1500">{{content.header_title_s}}</h2>
                                              <p  data-animation="animated slideInLeft">{{content.header_description_s}}</p>
                                             <a class="btn btn-info" style="color: #000;"  href="https://www.youtube.com/watch?v=owhuBrGIOsE">
-                                                Abonnez-vous avec nous
+                                                Subscribe
                                             </a>
                                         </div>
                                     </div>

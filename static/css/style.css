@@ -6934,3 +6934,8 @@ min-height : 120px;
 .pf-item:hover + .desx-a {
     display: none;
 }
+@media (min-width: 1024px){
+    nav.navbar.bootsnav ul.nav.navbar-right .dropdown-menu {
+            right: 0 !important;
+    }
+}

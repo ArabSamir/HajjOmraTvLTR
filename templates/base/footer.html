@@ -14,51 +14,6 @@
         <div class="container">
             <div class="f-items default-padding ">
                 <div class="row ">
-                    <div class="col-lg-4 col-md-6 item">
-                        <div class="f-item ">
-                            <h4 class="widget-title">Restez en contact</h4>
-                            <div class="address ">
-                                <ul>
-                                    <li>
-                                        <strong>Adresse :</strong>
-                                        {{contact.adresse}}
-                                    </li>
-                                    <li>
-                                        <strong>Email:</strong>
-                                        {{contact.first_email}}<br>
-                                        {{contact.secound_email}}
-
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-2 col-md-6 item">
-                        <div class="f-item link ">
-                            <h4 class="widget-title">Pages :</h4>
-                            <ul>
-                                <li>
-                                    <a href="{% url 'blog' %}">Blog</a>
-                                </li>
-                                <li>
-                                    <a href="{% if request.resolver_match.url_name == 'index' %}#about_us{% else %}{% url 'index' %}#about_us{% endif %}">A propos</a>
-                                </li>
-                                <li>
-                                    <a href="{% if request.resolver_match.url_name == 'index' %}#contact{% else %}{% url 'index' %}#contact{% endif %}">Contactez Nous</a>
-                                </li>
-                                {% if request.user.is_admin  %}
-                                    
-                                
-                                <li>
-                                    <a href="{% url 'dashboard' %}">Dashboard </a>
-                                </li>
-                                {% endif %}
-                            </ul>
-                        </div>
-                    </div>
-
-                    
                     <div class="col-lg-4 col-md-6 item ">
                         <div class="f-item about ">
                             <img src="{{content.logo.url}}" style="height: 70px; " alt="Logo">
@@ -92,6 +47,52 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-4 col-md-6 item">
+                        <div class="f-item ">
+                            <h4 class="widget-title">Get In Touch</h4>
+                            <div class="address ">
+                                <ul>
+                                    <li>
+                                        <strong>Adresse :</strong>
+                                        {{contact.adresse}}
+                                    </li>
+                                    <li>
+                                        <strong>Email:</strong>
+                                        {{contact.first_email}}<br>
+                                        {{contact.secound_email}}
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 item">
+                        <div class="f-item link ">
+                            <h4 class="widget-title">Pages :</h4>
+                            <ul>
+                                <li>
+                                    <a href="{% url 'blog' %}">Blog</a>
+                                </li>
+                                <li>
+                                    <a href="{% if request.resolver_match.url_name == 'index' %}#about_us{% else %}{% url 'index' %}#about_us{% endif %}">About Us</a>
+                                </li>
+                                <li>
+                                    <a href="{% if request.resolver_match.url_name == 'index' %}#contact{% else %}{% url 'index' %}#contact{% endif %}">Contact Us</a>
+                                </li>
+                                {% if request.user.is_admin  %}
+                                    
+                                
+                                <li>
+                                    <a href="{% url 'dashboard' %}">Dashboard </a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    
+                    
                 </div>
             </div>
         </div>

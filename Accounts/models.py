@@ -177,6 +177,8 @@ class Content(models.Model):
 	header_description_s = models.TextField(   max_length=250 , blank=True , null=True ,verbose_name='وصف رأس الصفحة الثاني')
 	header_image_s = models.ImageField(upload_to='images/' ,  default='../static/img/photo1.jpg',verbose_name='صورة رأ الثانيةص الصفحة' )
 	
+	training_title = models.CharField(   max_length=250 , blank=True , null=True ,verbose_name='عنوان  قسم  الدورات')
+	
 	paypal_client_id = models.CharField(   max_length=250 , blank=True , null=True ,verbose_name='رقم عميل PayPal')
 	ccp = models.CharField(   max_length=250 , blank=True , null=True ,verbose_name='رقم  الحساب')
 	class Meta:
